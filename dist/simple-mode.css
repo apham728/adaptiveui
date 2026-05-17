@@ -21,8 +21,9 @@
 .accessibility-simple-mode .simple-mode-jargon {
   position: relative;
   cursor: help;
-  border-bottom: 2px dotted #8b5cf6;
-  padding-bottom: 1px;
+  background-color: rgba(239, 68, 68, 0.15);
+  padding: 2px 4px;
+  border-radius: 3px;
   color: inherit;
   text-decoration: none;
   display: inline;
@@ -85,10 +86,9 @@
   visibility: visible;
 }
 
-/* Visual indicator - subtle highlight */
+/* Visual indicator - darker highlight on hover */
 .accessibility-simple-mode .simple-mode-jargon:hover {
-  background-color: rgba(139, 92, 246, 0.1);
-  border-radius: 3px;
+  background-color: rgba(239, 68, 68, 0.25);
 }
 
 /* Handle long definitions that need wrapping */

@@ -524,7 +524,6 @@ function applySimpleMode() {
     'criteria': 'standards or requirements',
     'hypothesis': 'educated guess or theory',
     'methodology': 'way of doing something',
-    'preliminary': 'first or introductory',
 
     // Financial terms
     'allocate': 'distribute or assign',
