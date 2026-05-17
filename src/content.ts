@@ -279,6 +279,30 @@ function hideMediaElements() {
       svg.innerHTML = '';
     }
   });
+
+  // Hide CSS background-image thumbnails (common in news card UIs like CNN).
+  document.querySelectorAll<HTMLElement>('*').forEach((el) => {
+    if (el.classList.contains('focus-mode-hidden-bg-media')) {
+      return;
+    }
+
+    const bgImage = window.getComputedStyle(el).backgroundImage;
+    const hasBackgroundMedia = bgImage && bgImage !== 'none' && bgImage.includes('url(');
+    if (!hasBackgroundMedia) {
+      return;
+    }
+
+    // Avoid stripping likely tiny icon backgrounds.
+    const rect = el.getBoundingClientRect();
+    const isLikelyThumbnail = rect.width >= 60 && rect.height >= 60;
+    if (!isLikelyThumbnail) {
+      return;
+    }
+
+    el.classList.add('focus-mode-hidden-bg-media');
+    el.setAttribute('data-focus-original-bg-image', el.style.backgroundImage || '');
+    el.style.backgroundImage = 'none';
+  });
 }
 
 function highlightFirstSentences() {
@@ -467,6 +491,14 @@ function removeFocusMode() {
         el.removeAttribute('data-focus-original-content');
       }
     }
+  });
+
+  // Restore stripped background thumbnails.
+  document.querySelectorAll<HTMLElement>('.focus-mode-hidden-bg-media').forEach((el) => {
+    const originalBgImage = el.getAttribute('data-focus-original-bg-image');
+    el.style.backgroundImage = originalBgImage || '';
+    el.removeAttribute('data-focus-original-bg-image');
+    el.classList.remove('focus-mode-hidden-bg-media');
   });
 
   document.body.classList.remove('reduce-motion');

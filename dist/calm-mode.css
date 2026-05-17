@@ -1,11 +1,5 @@
 /* Calm Mode Styles: Muted Palette + Hidden Distractions */
 
-/* Base calming palette */
-.accessibility-calm-mode {
-  background: #f2f4f6 !important;
-  color: #374151 !important;
-}
-
 /* Maintain legible text and remove visual noise effects */
 .accessibility-calm-mode * {
   text-shadow: none !important;

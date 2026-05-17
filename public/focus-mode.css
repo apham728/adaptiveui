@@ -53,95 +53,16 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Hide images and videos but show empty placeholder boxes */
-.accessibility-focus-mode img.focus-mode-hidden-media {
-  /* Keep original dimensions but remove the image */
-  visibility: visible !important;
-  opacity: 1 !important;
-  background: #f3f4f6 !important;
-  border: 2px solid #d1d5db !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
-
-  /* Hide the broken image icon */
-  font-size: 0 !important;
-  color: transparent !important;
-  text-indent: -9999px !important;
-  overflow: hidden !important;
-
-  /* Additional techniques to hide the broken image icon */
-  content: '' !important;
-  -webkit-user-select: none !important;
-  user-select: none !important;
-
-  /* Ensure minimum size for very small images */
-  min-height: 40px !important;
-  display: inline-block !important;
-}
-
-.accessibility-focus-mode video.focus-mode-hidden-media {
-  /* Keep original dimensions but remove the video */
-  visibility: visible !important;
-  opacity: 1 !important;
-  background: #f3f4f6 !important;
-  border: 2px solid #d1d5db !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
-
-  /* Ensure minimum size */
-  min-height: 100px !important;
-  display: inline-block !important;
-}
-
-.accessibility-focus-mode picture.focus-mode-hidden-media {
-  background: #f3f4f6 !important;
-  border: 2px solid #d1d5db !important;
-  border-radius: 6px !important;
-  display: inline-block !important;
-  min-height: 40px !important;
-  min-width: 100px !important;
-}
-
-.accessibility-focus-mode iframe.focus-mode-hidden-media {
-  visibility: visible !important;
-  opacity: 1 !important;
-  background: #f3f4f6 !important;
-  border: 2px solid #d1d5db !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
-
-  /* Show placeholder text for embeds */
-  position: relative !important;
-}
-
-.accessibility-focus-mode iframe.focus-mode-hidden-media::before {
-  content: 'Embedded Content Hidden' !important;
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  color: #9ca3af !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  text-align: center !important;
-  pointer-events: none !important;
-}
-
-.accessibility-focus-mode svg.focus-mode-hidden-media {
-  visibility: visible !important;
-  opacity: 1 !important;
-  background: #f3f4f6 !important;
-  border: 2px solid #d1d5db !important;
-  border-radius: 6px !important;
-}
-
-/* Optional: Completely hide media instead of showing placeholders */
-/*
+/* Completely hide media in Focus Mode (no placeholders) */
 .accessibility-focus-mode .focus-mode-hidden-media {
   display: none !important;
   visibility: hidden !important;
 }
-*/
+
+/* Hide elements whose CSS background images were stripped by the content script */
+.accessibility-focus-mode .focus-mode-hidden-bg-media {
+  background-image: none !important;
+}
 
 /* Optional focus timer indicator */
 .accessibility-focus-mode::before {
