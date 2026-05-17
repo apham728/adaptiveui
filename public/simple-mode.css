@@ -1,0 +1,182 @@
+/* Simple Mode Styles */
+
+/* Import Atkinson Hyperlegible font for better readability */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Apply Atkinson Hyperlegible font to entire page */
+.accessibility-simple-mode,
+.accessibility-simple-mode * {
+  font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Simplify text appearance */
+.accessibility-simple-mode p,
+.accessibility-simple-mode li,
+.accessibility-simple-mode span {
+  line-height: 1.7 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Jargon word styling with tooltip */
+.accessibility-simple-mode .simple-mode-jargon {
+  position: relative;
+  cursor: help;
+  border-bottom: 2px dotted #8b5cf6;
+  padding-bottom: 1px;
+  color: inherit;
+  text-decoration: none;
+  display: inline;
+}
+
+/* Tooltip bubble that appears on hover */
+.accessibility-simple-mode .simple-mode-jargon::before {
+  content: "ⓘ " attr(data-definition);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: #1f2937;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  max-width: 300px;
+  width: max-content;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Tooltip arrow pointing down */
+.accessibility-simple-mode .simple-mode-jargon::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #1f2937;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+/* Show tooltip and arrow on hover */
+.accessibility-simple-mode .simple-mode-jargon:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-12px);
+}
+
+.accessibility-simple-mode .simple-mode-jargon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Visual indicator - subtle highlight */
+.accessibility-simple-mode .simple-mode-jargon:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+  border-radius: 3px;
+}
+
+/* Handle long definitions that need wrapping */
+@media (max-width: 600px) {
+  .accessibility-simple-mode .simple-mode-jargon::before {
+    white-space: normal;
+    max-width: 200px;
+  }
+}
+
+/* Alternative: If tooltip goes off screen, flip it to show below */
+.accessibility-simple-mode .simple-mode-jargon.tooltip-below::before {
+  bottom: auto;
+  top: 100%;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.accessibility-simple-mode .simple-mode-jargon.tooltip-below:hover::before {
+  transform: translateX(-50%) translateY(12px);
+}
+
+.accessibility-simple-mode .simple-mode-jargon.tooltip-below::after {
+  bottom: auto;
+  top: 100%;
+  transform: translateX(-50%) translateY(-2px) rotate(180deg);
+}
+
+/* Improve form field clarity */
+.accessibility-simple-mode input,
+.accessibility-simple-mode textarea,
+.accessibility-simple-mode select {
+  border: 2px solid #d1d5db !important;
+  padding: 12px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}
+
+.accessibility-simple-mode label {
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+
+/* Add placeholder examples */
+.accessibility-simple-mode input::placeholder,
+.accessibility-simple-mode textarea::placeholder {
+  color: #9ca3af !important;
+  font-style: italic !important;
+}
+
+/* Simplify navigation */
+.accessibility-simple-mode nav a {
+  padding: 10px 16px !important;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid transparent !important;
+  transition: border-color 0.2s !important;
+}
+
+.accessibility-simple-mode nav a:hover,
+.accessibility-simple-mode nav a:focus {
+  border-bottom-color: #8b5cf6 !important;
+}
+
+/* Bullet points for lists */
+.accessibility-simple-mode ul {
+  list-style-type: disc !important;
+  padding-left: 24px !important;
+}
+
+.accessibility-simple-mode ol {
+  list-style-type: decimal !important;
+  padding-left: 24px !important;
+}
+
+/* Clear section breaks */
+.accessibility-simple-mode section {
+  margin-bottom: 2rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px dashed #e5e7eb !important;
+}
+
+/* Simplify buttons */
+.accessibility-simple-mode button {
+  min-height: 44px !important;
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}

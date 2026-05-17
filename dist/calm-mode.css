@@ -1,0 +1,157 @@
+/* Calm Mode Styles */
+
+/* Low-stimulation visual theme */
+.accessibility-calm-mode {
+  background: #f9fafb !important;
+  color: #374151 !important;
+}
+
+/* Softer contrast */
+.accessibility-calm-mode * {
+  transition: all 0.4s ease !important;
+}
+
+/* Enhanced text readability */
+.accessibility-calm-mode.calm-text-enhanced p,
+.accessibility-calm-mode.calm-text-enhanced li,
+.accessibility-calm-mode.calm-text-enhanced span,
+.accessibility-calm-mode.calm-text-enhanced div {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.02em !important;
+  max-width: 70ch !important;
+}
+
+/* Increase heading sizes */
+.accessibility-calm-mode h1 {
+  font-size: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+  color: #1f2937 !important;
+}
+
+.accessibility-calm-mode h2 {
+  font-size: 2rem !important;
+  margin-bottom: 1.25rem !important;
+  color: #1f2937 !important;
+}
+
+.accessibility-calm-mode h3 {
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  color: #374151 !important;
+}
+
+/* Better spacing */
+.accessibility-calm-mode p {
+  margin-bottom: 1.5rem !important;
+}
+
+.accessibility-calm-mode section,
+.accessibility-calm-mode article {
+  padding: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Shorter line length */
+.accessibility-calm-mode main,
+.accessibility-calm-mode article,
+.accessibility-calm-mode .content {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 2rem !important;
+}
+
+/* Reduce simultaneous choices - hide secondary actions */
+.accessibility-calm-mode .calm-mode-secondary {
+  opacity: 0.4 !important;
+  filter: grayscale(0.8) !important;
+  scale: 0.95 !important;
+}
+
+.accessibility-calm-mode .calm-mode-secondary:hover,
+.accessibility-calm-mode .calm-mode-secondary:focus {
+  opacity: 1 !important;
+  filter: grayscale(0) !important;
+  scale: 1 !important;
+}
+
+/* Step-by-step flow indicator */
+.accessibility-calm-mode form,
+.accessibility-calm-mode .wizard,
+.accessibility-calm-mode .steps {
+  counter-reset: step-counter;
+}
+
+.accessibility-calm-mode form > *,
+.accessibility-calm-mode .step {
+  position: relative;
+  padding-left: 3rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.accessibility-calm-mode form > *::before,
+.accessibility-calm-mode .step::before {
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #e0e7ff;
+  color: #4338ca;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Persistent navigation hints */
+.accessibility-calm-mode::after {
+  content: attr(data-calm-hint);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4338ca;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Calm color scheme */
+.accessibility-calm-mode a {
+  color: #6366f1 !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(99, 102, 241, 0.3) !important;
+  text-underline-offset: 3px !important;
+}
+
+.accessibility-calm-mode a:hover {
+  color: #4f46e5 !important;
+  text-decoration-color: #4f46e5 !important;
+}
+
+/* Reduce visual noise */
+.accessibility-calm-mode img,
+.accessibility-calm-mode video {
+  border-radius: 8px !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* Consistent navigation */
+.accessibility-calm-mode nav {
+  background: white !important;
+  padding: 1rem 2rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
