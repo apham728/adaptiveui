@@ -174,7 +174,7 @@ export default function App() {
                     </Label>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Atkinson font, hover jargon for definitions
+                    Atkinson Hyperlegible font, hover jargon for definitions
                   </p>
                 </div>
                 <Switch
@@ -195,7 +195,7 @@ export default function App() {
                     </Label>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Low-stimulation theme with enhanced readability
+                    Low stimulation theme with removal of ads and visual distractions
                   </p>
                 </div>
                 <Switch
