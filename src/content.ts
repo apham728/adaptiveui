@@ -6,19 +6,36 @@ interface Modes {
   calmMode: boolean;
 }
 
+type TextSize = 'regular' | 'large' | 'huge';
+const MIN_TEXT_SCALE = 100;
+const MAX_TEXT_SCALE = 150;
+
 let modes: Modes = {
   focusMode: false,
   simpleMode: false,
   calmMode: false
 };
+let textSize: TextSize = 'regular';
+let textScale = 100;
 
 // Load initial state
-chrome.storage.local.get(['focusMode', 'simpleMode', 'calmMode'], (result) => {
+chrome.storage.local.get(['focusMode', 'simpleMode', 'calmMode', 'textSize', 'textScale'], (result) => {
   modes = {
     focusMode: result.focusMode || false,
     simpleMode: result.simpleMode || false,
     calmMode: result.calmMode || false
   };
+  if (typeof result.textScale === 'number' && Number.isFinite(result.textScale)) {
+    textScale = clampTextScale(result.textScale);
+  } else {
+    if (result.textSize === 'large' || result.textSize === 'huge') {
+      textSize = result.textSize;
+    } else {
+      textSize = 'regular';
+    }
+    textScale = textSize === 'large' ? 113 : textSize === 'huge' ? 125 : 100;
+  }
+  applyTextScale(textScale);
   applyAllModes();
 });
 
@@ -28,12 +45,66 @@ chrome.runtime.onMessage.addListener((message: any) => {
     modes[message.mode as keyof Modes] = message.enabled;
     applyMode(message.mode, message.enabled);
   }
+  if (message.type === 'SET_TEXT_SIZE') {
+    if (message.size === 'regular' || message.size === 'large' || message.size === 'huge') {
+      textSize = message.size;
+      const legacyScale = textSize === 'large' ? 113 : textSize === 'huge' ? 125 : 100;
+      textScale = legacyScale;
+      applyTextScale(textScale);
+    }
+  }
+  if (message.type === 'SET_TEXT_SCALE' && typeof message.scale === 'number') {
+    textScale = clampTextScale(message.scale);
+    applyTextScale(textScale);
+  }
 });
 
 function applyAllModes() {
   Object.keys(modes).forEach(mode => {
     applyMode(mode, modes[mode as keyof Modes]);
   });
+}
+
+function clampTextScale(value: number) {
+  return Math.min(MAX_TEXT_SCALE, Math.max(MIN_TEXT_SCALE, Math.round(value)));
+}
+
+function applyTextScale(scalePercent: number) {
+  const clamped = clampTextScale(scalePercent);
+  const scale = String(clamped / 100);
+
+  // Root scale (works on rem-based sites)
+  document.documentElement.style.fontSize =
+    clamped === 100 ? "" : `${clamped}%`;
+
+  // Inject/update override style (works on px-based sites)
+  let styleEl = document.getElementById("adaptiveui-text-size-style") as HTMLStyleElement | null;
+  if (!styleEl) {
+    styleEl = document.createElement("style");
+    styleEl.id = "adaptiveui-text-size-style";
+    document.head.appendChild(styleEl);
+  }
+
+  if (clamped === 100) {
+    styleEl.textContent = "";
+    return;
+  }
+
+  styleEl.textContent = `
+    :root { --adaptiveui-text-scale: ${scale}; }
+
+    body p, body li, body span, body a, body label, body blockquote,
+    body h1, body h2, body h3, body h4, body h5, body h6, body td, body th {
+      font-size: calc(1em * var(--adaptiveui-text-scale)) !important;
+      line-height: calc(1.2em * var(--adaptiveui-text-scale)) !important;
+    }
+
+    /* Avoid blowing up icons/inputs/buttons/layout chrome */
+    svg, i, [class*="icon"], button, input, textarea, select {
+      font-size: inherit !important;
+      line-height: inherit !important;
+    }
+  `;
 }
 
 function applyMode(mode: string, enabled: boolean) {

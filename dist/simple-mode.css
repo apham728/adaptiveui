@@ -3,18 +3,78 @@
 /* Import Atkinson Hyperlegible font for better readability */
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* Apply Atkinson Hyperlegible font to entire page */
-.accessibility-simple-mode,
-.accessibility-simple-mode * {
+/* Apply Atkinson Hyperlegible font to main content only */
+.accessibility-simple-mode main,
+.accessibility-simple-mode main *,
+.accessibility-simple-mode article,
+.accessibility-simple-mode article *,
+.accessibility-simple-mode [role="main"],
+.accessibility-simple-mode [role="main"] *,
+.accessibility-simple-mode .content,
+.accessibility-simple-mode .content *,
+.accessibility-simple-mode .mw-content-text,
+.accessibility-simple-mode .mw-content-text * {
   font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
-/* Simplify text appearance */
-.accessibility-simple-mode p,
-.accessibility-simple-mode li,
-.accessibility-simple-mode span {
+/* Keep default fonts for sidebars and navigation */
+.accessibility-simple-mode aside,
+.accessibility-simple-mode aside *,
+.accessibility-simple-mode nav,
+.accessibility-simple-mode nav *,
+.accessibility-simple-mode [role="navigation"],
+.accessibility-simple-mode [role="navigation"] *,
+.accessibility-simple-mode [role="complementary"],
+.accessibility-simple-mode [role="complementary"] *,
+.accessibility-simple-mode .sidebar,
+.accessibility-simple-mode .sidebar *,
+.accessibility-simple-mode header,
+.accessibility-simple-mode header *,
+.accessibility-simple-mode footer,
+.accessibility-simple-mode footer *,
+.accessibility-simple-mode .mw-panel,
+.accessibility-simple-mode .mw-panel *,
+.accessibility-simple-mode #mw-panel,
+.accessibility-simple-mode #mw-panel * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Simplify text appearance - only for main content, not sidebars/navigation */
+.accessibility-simple-mode main p,
+.accessibility-simple-mode article p,
+.accessibility-simple-mode [role="main"] p,
+.accessibility-simple-mode .content p,
+.accessibility-simple-mode main li,
+.accessibility-simple-mode article li,
+.accessibility-simple-mode [role="main"] li,
+.accessibility-simple-mode .content li {
   line-height: 1.7 !important;
   letter-spacing: 0.01em !important;
+}
+
+/* Exclude sidebars, navigation, and UI elements from spacing changes */
+.accessibility-simple-mode aside,
+.accessibility-simple-mode aside *,
+.accessibility-simple-mode nav,
+.accessibility-simple-mode nav *,
+.accessibility-simple-mode [role="navigation"],
+.accessibility-simple-mode [role="navigation"] *,
+.accessibility-simple-mode [role="complementary"],
+.accessibility-simple-mode [role="complementary"] *,
+.accessibility-simple-mode .sidebar,
+.accessibility-simple-mode .sidebar *,
+.accessibility-simple-mode .navigation,
+.accessibility-simple-mode .navigation *,
+.accessibility-simple-mode header,
+.accessibility-simple-mode header *,
+.accessibility-simple-mode footer,
+.accessibility-simple-mode footer *,
+.accessibility-simple-mode .mw-panel,
+.accessibility-simple-mode .mw-panel *,
+.accessibility-simple-mode #mw-panel,
+.accessibility-simple-mode #mw-panel * {
+  line-height: normal !important;
+  letter-spacing: normal !important;
 }
 
 /* Jargon word styling with tooltip */
